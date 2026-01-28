@@ -1,0 +1,224 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ================= FONTS ================= */
+
+@font-face {
+  font-family: "VT-Body";
+  src: url("./Assets/Degular_Fonts/Degular-Bold.otf");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "VT-Display";
+  src: url("./Assets/beachday.regular.otf");
+  font-display: swap;
+}
+
+/* ================= GLOBAL BASE ================= */
+
+body {
+  font-family: "VT-Body", sans-serif;
+  background-color: #f9fafb;
+  color: #111827;
+}
+
+/* ================= HEADINGS ================= */
+
+/* Funky / Brand Heading (used on Products, About, Hero, etc.) */
+.HeroHeading {
+  font-family: "VT-Display", cursive;
+  letter-spacing: 0.04em;
+}
+
+/* Optional stroke effect (you already used it well) */
+.text-stroke {
+  -webkit-text-stroke: 1px white;
+}
+
+/* ================= SCROLLBAR ================= */
+
+/* Hide main scrollbar */
+#Frame::-webkit-scrollbar {
+  display: none;
+}
+#Frame {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Custom Scrollbar */
+#CustomScroll::-webkit-scrollbar {
+  width: 28px;
+}
+
+#CustomScroll::-webkit-scrollbar-thumb {
+  background: #9A1E85;
+  border-radius: 999px;
+  border: 9px solid rgba(0, 0, 0, 0);
+  background-clip: padding-box;
+}
+
+/* ================= INPUT FIXES ================= */
+
+/* Hide number input arrows */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* ================= SWIPER DOTS ================= */
+
+/* Base dot */
+.swiper-pagination-bullet.custom-bullet {
+  opacity: 0.8 !important;
+  width: 12px;
+  height: 12px;
+  background: #ffffff;
+  border-radius: 50px;
+  display: inline-block;
+  margin: 0 6px !important;
+  overflow: hidden;
+  position: relative;
+  top: 10px;
+}
+
+/* Inner fill animation */
+.swiper-pagination-bullet.custom-bullet .fill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0%;
+  height: 100%;
+  background: #02192F;
+  border-radius: 12px;
+  transition: width linear;
+}
+
+/* Active animation */
+.swiper-pagination-bullet.custom-bullet.swiper-pagination-bullet-active .fill {
+  width: 100%;
+  transition: width 5s linear;
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ================= FONTS ================= */
+
+@font-face {
+  font-family: "VT-Body";
+  src: url("./Assets/Degular_Fonts/Degular-Bold.otf");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "VT-Display";
+  src: url("./Assets/beachday.regular.otf");
+  font-display: swap;
+}
+
+/* ================= GLOBAL BASE ================= */
+
+body {
+  font-family: "VT-Body", sans-serif;
+  background-color: #f9fafb;
+  color: #111827;
+}
+
+/* ================= HEADINGS ================= */
+
+/* Funky / Brand Heading (used on Products, About, Hero, etc.) */
+.HeroHeading {
+  font-family: "VT-Display", cursive;
+  letter-spacing: 0.04em;
+}
+
+/* Optional stroke effect (you already used it well) */
+.text-stroke {
+  -webkit-text-stroke: 1px white;
+}
+
+/* ================= SCROLLBAR ================= */
+
+/* Hide main scrollbar */
+#Frame::-webkit-scrollbar {
+  display: none;
+}
+#Frame {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Custom Scrollbar */
+#CustomScroll::-webkit-scrollbar {
+  width: 28px;
+}
+
+#CustomScroll::-webkit-scrollbar-thumb {
+  background: #9A1E85;
+  border-radius: 999px;
+  border: 9px solid rgba(0, 0, 0, 0);
+  background-clip: padding-box;
+}
+
+/* ================= INPUT FIXES ================= */
+
+/* Hide number input arrows */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* ================= SWIPER DOTS ================= */
+
+/* Base dot */
+.swiper-pagination-bullet.custom-bullet {
+  opacity: 0.8 !important;
+  width: 12px;
+  height: 12px;
+  background: #ffffff;
+  border-radius: 50px;
+  display: inline-block;
+  margin: 0 6px !important;
+  overflow: hidden;
+  position: relative;
+  top: 10px;
+}
+
+/* Inner fill animation */
+.swiper-pagination-bullet.custom-bullet .fill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0%;
+  height: 100%;
+  background: #02192F;
+  border-radius: 12px;
+  transition: width linear;
+}
+
+/* Active animation */
+.swiper-pagination-bullet.custom-bullet.swiper-pagination-bullet-active .fill {
+  width: 100%;
+  transition: width 5s linear;
+}
+
+/* Active cylinder effect */
+.swiper-pagination-bullet.custom-bullet.swiper-pagination-bullet-active {
+  width: 24px;
+  border-radius: 12px;
+  transition: width 0.3s ease;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+    display: none;
+}
+.scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
