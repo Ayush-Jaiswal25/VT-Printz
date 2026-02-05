@@ -2,7 +2,7 @@
 // import { Link } from "react-router-dom";
 // import { ArrowUpRight } from "lucide-react";
 
-// const ServiceCard = ({ title, image, slug }) => {
+// const ServiceCard = ({ title, image, slug, categorySlug }) => {
 //   return (
 //     <Link
 //       to={`/services/${slug}`}
@@ -64,10 +64,10 @@
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 
-const ServiceCard = ({ title, image, slug }) => {
+const ServiceCard = ({ title, image, slug, categorySlug }) => {
   return (
     <Link
-      to={`/services/printing-services/${slug}`}
+      to={`/services/${categorySlug}/${slug}`}
       className="group block focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 rounded-xl"
     >
       <div className="rounded-xl border border-gray-200 bg-white p-6 transition-all duration-300 hover:shadow-xl hover:-translate-y-1">

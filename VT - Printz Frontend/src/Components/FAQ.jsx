@@ -105,7 +105,7 @@ export default function FAQ() {
 <div className=" py-[10px] bg-gradient-to-b from-gray-100 to-[#fadbe9] relative overflow-hidden"></div>
   <div className=" py-[40px] bg-gradient-to-b to-[#ffffff] from-[#fadbe9] relative overflow-hidden"></div>
 
-      <h2 className="text-4xl font-extrabold text-center mb-12 text-pink-600">
+      <h2 className="text-4xl font-extrabold text-center mb-12 mt-8 text-pink-600">
         Frequently <span className="border-b-2 border-[#0085E1]">Asked</span> Questions
       </h2>
       

@@ -1,12 +1,15 @@
 import React, { useRef } from 'react';
 
 const stories = [
+    { name: 'Logo TShirts', video: '/videos/logo-tshirt.mp4' },
+    { name: 'Visiting Cards', video: '/videos/visiting-card.mp4' },
+    { name: 'Printed Mugs', video: '/videos/printed-mug.mp4' },
     { name: 'T Shirts', video: '/videos/tshirts.mp4' },
     { name: 'Badges', video: '/videos/badges.mp4' },
     { name: 'Mobile Stand', video: '/videos/mobile-stand.mp4' },
     { name: 'Metal Pens', video: '/videos/pens.mp4' },
     { name: 'Keychains', video: '/videos/keychains.mp4' },
-    { name: 'Colors', video: '/videos/colors.mp4' },
+    { name: 'Frames', video: '/videos/colors.mp4' },
     { name: 'Fabric', video: '/videos/fabric.mp4' },
     { name: 'Quality', video: '/videos/quality.mp4' },
 ];
@@ -14,7 +17,7 @@ const stories = [
 const VideoStories = () => {
     return (
         <div className="w-full flex justify-center py-6 overflow-hidden">
-            <div className="flex gap-4 md:gap-8 overflow-x-auto px-4 pb-4 scrollbar-hide w-full max-w-7xl justify-start md:justify-center">
+            <div className="flex gap-4 md:gap-8 overflow-x-auto px-4 pb-4 scrollbar-hide w-full max-w 8xl justify-start md:justify-center">
                 {stories.map((story, index) => (
                     <StoryItem key={index} name={story.name} video={story.video} />
                 ))}

@@ -1,11 +1,40 @@
+import React, { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
-import { servicesData } from "../data/ServiceData";
+import axios from 'axios';
+import { Loader2 } from 'lucide-react';
+import CustomProductPage from "./CustomProductPage";
 
 const ServiceCategoryPage = () => {
   const { categorySlug, serviceSlug, subSlug } = useParams();
 
-  // 1️⃣ Find category
-  const selectedCategory = servicesData.find(
+  const [catalogData, setCatalogData] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  // Fetch Data
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res = await axios.get("http://localhost:5000/api/catalog/full-catalog");
+        setCatalogData(res.data);
+      } catch (error) {
+        console.error("Failed to load catalog:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchData();
+  }, []);
+
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center pt-24">
+        <Loader2 className="animate-spin text-[#DB2A7B]" size={48} />
+      </div>
+    );
+  }
+
+  // 1️⃣ Find category from loaded data
+  const selectedCategory = catalogData.find(
     (category) => category.categorySlug === categorySlug
   );
 
@@ -80,37 +109,8 @@ const ServiceCategoryPage = () => {
     );
   }
 
-  // 5️⃣ SERVICE PAGE (list subcategories)
-  return (
-    <div className="bg-gray-50 pt-24">
-      <div className="max-w-7xl mx-auto px-6 py-16">
-        <h2 className="text-3xl font-bold text-[#9A1E85] mb-8">
-          {selectedService.title}
-        </h2>
-
-        {selectedService.subcategories.length > 0 ? (
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
-            {selectedService.subcategories.map((sub) => (
-              <Link
-                key={sub.slug}
-                to={`/services/${categorySlug}/${serviceSlug}/${sub.slug}`}
-                className="block rounded-xl border bg-white p-6 hover:shadow-lg"
-              >
-                <img
-                  src={sub.image}
-                  alt={sub.title}
-                  className="h-40 w-full object-cover rounded-lg"
-                />
-                <h3 className="mt-4 font-semibold">{sub.title}</h3>
-              </Link>
-            ))}
-          </div>
-        ) : (
-          <p className="text-gray-500">No subcategories available.</p>
-        )}
-      </div>
-    </div>
-  );
+  // 5️⃣ SERVICE PAGE (list subcategories / products)
+  return <CustomProductPage />;
 };
 
 export default ServiceCategoryPage;

@@ -1,10 +1,11 @@
 import React from "react";
+import printingBg from "../Assets/printing-bg.png";
 
 const AboutUs = () => {
   return (
     <div
       className="relative text-white overflow-hidden bg-cover bg-center bg-no-repeat"
-      style={{ backgroundImage: "url(/printing-bg.png)" }}
+      style={{ backgroundImage: `url(${printingBg})` }}
     >
       {/* DARK OVERLAY */}
       <div className="absolute inset-0 bg-[#02192F]/31"></div>
@@ -12,12 +13,12 @@ const AboutUs = () => {
       {/* CONTENT */}
       <div className="relative z-10">
 
-       {/* ================= HERO ================= */}
-<section className="relative text-center px-6 md:px-16 pt-6 pb-14 mt-6">
+        {/* ================= HERO ================= */}
+        <section className="relative text-center px-6 md:px-16 pt-6 pb-14 mt-6">
 
-  {/* HERO BACKDROP */}
-  <div
-    className="
+          {/* HERO BACKDROP */}
+          <div
+            className="
       absolute inset-0
       mx-4 md:mx-10
       rounded-3xl
@@ -27,30 +28,30 @@ const AboutUs = () => {
       to-[#02192F]/60
       backdrop-blur-sm
     "
-  ></div>
+          ></div>
 
-  {/* HERO CONTENT */}
-  <div className="relative z-10 py-14">
-    <h1 className="HeroHeading text-4xl md:text-5xl mb-4 text-white drop-shadow-lg">
-      About{" "}
-      <span className="
+          {/* HERO CONTENT */}
+          <div className="relative z-10 py-14">
+            <h1 className="HeroHeading text-4xl md:text-5xl mb-4 text-white drop-shadow-lg">
+              About{" "}
+              <span className="
         text-[#DB2A7B]
         drop-shadow-[0_3px_10px_rgba(219,42,123,0.6)]
       ">
-        VT Printz
-      </span>
-    </h1>
+                VT Printz
+              </span>
+            </h1>
 
-    <p className="text-gray-100 max-w-3xl mx-auto text-base md:text-lg font-medium">
-      Your one-stop solution for high-quality, customized printing services.
-    </p>
+            <p className="text-gray-100 max-w-3xl mx-auto text-base md:text-lg font-medium">
+              Your one-stop solution for high-quality, customized printing services.
+            </p>
 
-    <p className="text-gray-200 max-w-2xl mx-auto mt-3 text-sm">
-      Trusted by local businesses, startups, and creators for precision,
-      reliability, and vibrant print quality.
-    </p>
-  </div>
-</section>
+            <p className="text-gray-200 max-w-2xl mx-auto mt-3 text-sm">
+              Trusted by local businesses, startups, and creators for precision,
+              reliability, and vibrant print quality.
+            </p>
+          </div>
+        </section>
 
 
 
