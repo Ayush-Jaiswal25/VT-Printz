@@ -55,6 +55,8 @@ import connectMongoDB from './connect-mongodb.js';
 import cloudinaryConnect from './connect-cloudinary.js';
 import feedbackRoutes from './routes/feedback.routes.js';
 import serviceRoutes from "./routes/serviceRoutes.js";
+import authRoutes from "./routes/auth.routes.js";
+
 
 
 const vtPrintzBackend = express();
@@ -82,6 +84,9 @@ vtPrintzBackend.use(express.urlencoded({ extended: true }));
 // -------------------- ROUTES --------------------
 vtPrintzBackend.use('/api/feedback', feedbackRoutes);
 vtPrintzBackend.use("/api/services", serviceRoutes);
+
+vtPrintzBackend.use("/api/auth", authRoutes);
+
 
 
 vtPrintzBackend.get('/', (req, res) => {
