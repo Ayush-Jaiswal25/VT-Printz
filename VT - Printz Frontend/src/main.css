@@ -23,7 +23,9 @@ body {
   background-color: #f9fafb;
   color: #111827;
 }
-
+.body-routes{
+  margin-top: -25px;
+}
 /* ================= HEADINGS ================= */
 
 /* Funky / Brand Heading (used on Products, About, Hero, etc.) */
@@ -221,4 +223,15 @@ input::-webkit-inner-spin-button {
 .scrollbar-hide {
     -ms-overflow-style: none;
     scrollbar-width: none;
+}
+
+.hero-section {
+  margin-top: -25px;
+  height: 100%;
+}
+.hero-height {
+  height: 68vh;
+}
+.product-card{
+  margin-top: 180px;
 }

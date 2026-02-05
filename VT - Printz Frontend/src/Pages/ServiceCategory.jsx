@@ -1,5 +1,6 @@
 import { useParams, Link } from "react-router-dom";
 import { servicesData } from "../data/ServiceData";
+import CustomProductPage from "./CustomProductPage";
 
 const ServiceCategoryPage = () => {
   const { categorySlug, serviceSlug, subSlug } = useParams();
@@ -81,36 +82,7 @@ const ServiceCategoryPage = () => {
   }
 
   // 5️⃣ SERVICE PAGE (list subcategories)
-  return (
-    <div className="bg-gray-50 pt-24">
-      <div className="max-w-7xl mx-auto px-6 py-16">
-        <h2 className="text-3xl font-bold text-[#9A1E85] mb-8">
-          {selectedService.title}
-        </h2>
-
-        {selectedService.subcategories.length > 0 ? (
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
-            {selectedService.subcategories.map((sub) => (
-              <Link
-                key={sub.slug}
-                to={`/services/${categorySlug}/${serviceSlug}/${sub.slug}`}
-                className="block rounded-xl border bg-white p-6 hover:shadow-lg"
-              >
-                <img
-                  src={sub.image}
-                  alt={sub.title}
-                  className="h-40 w-full object-cover rounded-lg"
-                />
-                <h3 className="mt-4 font-semibold">{sub.title}</h3>
-              </Link>
-            ))}
-          </div>
-        ) : (
-          <p className="text-gray-500">No subcategories available.</p>
-        )}
-      </div>
-    </div>
-  );
+  return <CustomProductPage />;
 };
 
 export default ServiceCategoryPage;

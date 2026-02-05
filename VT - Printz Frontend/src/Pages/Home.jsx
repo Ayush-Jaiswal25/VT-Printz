@@ -6,6 +6,7 @@ import FAQ from '../Components/FAQ'
 import Featured from '../Components/Featured'
 
 import VideoStories from '../Components/VideoStories'
+import WatchAndBuy from './WatchAndBuy'
 
 function Home() {
   return (
@@ -14,10 +15,10 @@ function Home() {
       <HeroCarousel />
       <div className='w-full h-full'>
         <ProductGrid />
+        <WatchAndBuy />
         <CustomerCarousel />
         <Featured />
         <FAQ />
-
       </div>
     </div>
   )

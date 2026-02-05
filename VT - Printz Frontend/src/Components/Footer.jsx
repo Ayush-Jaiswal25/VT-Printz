@@ -1,9 +1,10 @@
 import React from "react";
 import { FaFacebookF, FaInstagram, FaTwitter } from "react-icons/fa";
+import { Link } from "react-router-dom"
 
 const Footer = () => {
   return (
-    <div className="bg-white px-4 sm:px-10 pb-8 mt-8">
+    <div className="px-4 sm:px-10 pb-8 mt-8">
       <footer className="relative max-w-7xl mx-auto rounded-[28px] bg-[#02192F] px-6 sm:px-12 py-6 text-gray-300">
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
@@ -36,29 +37,33 @@ const Footer = () => {
           <div className="grid grid-cols-3 gap-6 text-sm">
             <div>
               <h4 className="text-[#DB2A7B] mb-2">Company</h4>
-              <p>About Us</p>
-              <p>Location</p>
+              <Link to="/about-us"><p>About Us</p></Link>
+              <Link to="/location"><p>Location</p></Link>
               <p>Blog</p>
             </div>
 
             <div>
               <h4 className="text-[#DB2A7B] mb-2">Support</h4>
-              <p>FAQs</p>
+              <Link to="/faq"><p>FAQ</p></Link>
               <p>Contact</p>
             </div>
 
             <div>
               <h4 className="text-[#DB2A7B] mb-2">Quick Links</h4>
-              <p>Home</p>
-              <p>Products</p>
-              <p>Feedback</p>
+              <Link to="/"><p>Home</p></Link>
+              <Link to="/products"><p>Products</p></Link>
+              <Link to="/feedback-list"><p>Feedback</p></Link>
             </div>
           </div>
         </div>
 
         <div className="mt-6 pt-4 border-t border-white/20 text-xs flex justify-between">
           <p>© 2026 VT Printz</p>
-          <p>Privacy · Terms · Refund</p>
+          <p>
+            <Link to="/privacy-policy">Privacy Policy .</Link>
+            <Link to="/terms-of-service">Terms of Service .</Link>
+            <Link to="/Cancelation-Policy">Refund Policy</Link>
+          </p>
         </div>
 
       </footer>

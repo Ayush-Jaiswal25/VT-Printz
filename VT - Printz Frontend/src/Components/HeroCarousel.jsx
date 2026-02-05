@@ -3,9 +3,6 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
 import { Pagination, Autoplay } from "swiper/modules";
-import HeroTshirt from '../Assets/TShirt.png';
-import Capss from '../Assets/Capss.png';
-import poster from '../Assets/poster2.png';
 
 const HeroCarousel = () => {
   return (
@@ -14,15 +11,13 @@ const HeroCarousel = () => {
       autoplay={{ delay: 3000, disableOnInteraction: false }}
       loop
       pagination={{ clickable: true }}
-      className="w-full h-screen [&_.swiper-pagination]:hidden"
+      className="w-full h-screen [&_.swiper-pagination]:hidden hero-section"
     >
       {/* Slide 1 */}
       <SwiperSlide>
-        <section className="relative h-[80vh] w-full flex items-center justify-center bg-HeroImgSmall1 bg-cover bg-center bg-no-repeat">
+        <section className="relative h-[80vh] w-full flex items-center justify-center bg-HeroImgSmall1 bg-cover bg-center bg-no-repeat hero-height">
 
           <div className="absolute inset-0 bg-black/30"></div>
-
-
 
           <div className="relative flex flex-col lg:flex-row items-center w-full min-h-screen overflow-hidden pt-[95px] sm:pt-[10px] px-6">
 
@@ -58,7 +53,7 @@ const HeroCarousel = () => {
 
       {/* Slide 2 */}
       <SwiperSlide>
-        <section className="relative h-[80vh] w-full flex items-center justify-center bg-HeroImgSmall2 bg-cover bg-center bg-no-repeat">
+        <section className="relative h-[80vh] w-full flex items-center justify-center bg-HeroImgSmall2 bg-cover bg-center bg-no-repeat hero-height">
 
           <div className="absolute inset-0 bg-black/30"></div>
 
@@ -97,7 +92,7 @@ const HeroCarousel = () => {
 
       {/* Slide 3 */}
       <SwiperSlide>
-        <section className="relative h-[80vh] w-full flex items-center justify-center bg-HeroImgSmall4 bg-cover bg-center bg-no-repeat">
+        <section className="relative h-[80vh] w-full flex items-center justify-center bg-HeroImgSmall4 bg-cover bg-center bg-no-repeat hero-height">
 
           <div className="absolute inset-0 bg-black/30"></div>
 
@@ -136,7 +131,7 @@ const HeroCarousel = () => {
 
       {/* Slide 4 */}
       <SwiperSlide>
-        <section className="relative h-[80vh] w-full flex items-center justify-center bg-HeroImgSmall3 bg-cover bg-center bg-no-repeat">
+        <section className="relative h-[80vh] w-full flex items-center justify-center bg-HeroImgSmall3 bg-cover bg-center bg-no-repeat hero-height">
 
           <div className="absolute inset-0 bg-black/30"></div>
 

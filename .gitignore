@@ -23,3 +23,15 @@ dist-ssr
 *.sln
 *.sw?
 *.env
+
+# Backend
+Backend/node_modules
+Backend/.env
+
+# Frontend
+Frontend/node_modules
+Frontend/.env
+
+# Common
+.env
+.DS_Store
