@@ -2,223 +2,144 @@
 @tailwind components;
 @tailwind utilities;
 
-/* ================= FONTS ================= */
-
 @font-face {
-  font-family: "VT-Body";
-  src: url("./Assets/Degular_Fonts/Degular-Bold.otf");
-  font-display: swap;
+  font-family: VT-Font;
+  src: url(./Assets/Degular_Fonts/Degular-Bold.otf);
 }
 
 @font-face {
-  font-family: "VT-Display";
-  src: url("./Assets/beachday.regular.otf");
-  font-display: swap;
+  font-family: VT-Hero-Heading-Font;
+  src: url(./Assets/beachday.regular.otf);
 }
 
-/* ================= GLOBAL BASE ================= */
-
-body {
-  font-family: "VT-Body", sans-serif;
-  background-color: #f9fafb;
-  color: #111827;
+*{
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  text-decoration: none;
+  font-family: VT-Font;
 }
 
-/* ================= HEADINGS ================= */
-
-/* Funky / Brand Heading (used on Products, About, Hero, etc.) */
-.HeroHeading {
-  font-family: "VT-Display", cursive;
-  letter-spacing: 0.04em;
+.HeroHeading{
+  font-family: VT-Hero-Heading-Font;
 }
 
-/* Optional stroke effect (you already used it well) */
-.text-stroke {
-  -webkit-text-stroke: 1px white;
+
+/* To Hide main scrollbar */
+#Frame::-webkit-scrollbar{ display: none; }
+#Frame{ -ms-overflow-style: none; }
+
+.hidescroll::-webkit-scrollbar{ display: none; }
+.hidescroll{ -ms-overflow-style: none; }
+
+/* To Hide Number Input arrows */
+input::-webkit-outer-spin-button, input::-webkit-inner-spin-button { 
+  -webkit-appearance: none;
+  margin: 0; 
 }
 
-/* ================= SCROLLBAR ================= */
-
-/* Hide main scrollbar */
-#Frame::-webkit-scrollbar {
-  display: none;
-}
-#Frame {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-}
-
-/* Custom Scrollbar */
+/* Custom Scroll Bar */
+/* width */
 #CustomScroll::-webkit-scrollbar {
   width: 28px;
 }
-
 #CustomScroll::-webkit-scrollbar-thumb {
-  background: #9A1E85;
+  background: #9A1E85   ;
   border-radius: 999px;
   border: 9px solid rgba(0, 0, 0, 0);
   background-clip: padding-box;
 }
 
-/* ================= INPUT FIXES ================= */
 
-/* Hide number input arrows */
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
 
-/* ================= SWIPER DOTS ================= */
+
+
 
 /* Base dot */
 .swiper-pagination-bullet.custom-bullet {
-  opacity: 0.8 !important;
+  opacity: 0.8 !important;  /* force fully opaque */
   width: 12px;
   height: 12px;
-  background: #ffffff;
+  background: #fff; /* background circle */
   border-radius: 50px;
   display: inline-block;
   margin: 0 6px !important;
   overflow: hidden;
   position: relative;
-  top: 10px;
+  top: 10px
 }
 
-/* Inner fill animation */
+
+/* Inner fill element */
 .swiper-pagination-bullet.custom-bullet .fill {
   position: absolute;
   top: 0;
   left: 0;
-  width: 0%;
+  width: 0%; /* will grow to 100% */
   height: 100%;
   background: #02192F;
   border-radius: 12px;
   transition: width linear;
 }
 
-/* Active animation */
+/* Active dot triggers fill animation */
 .swiper-pagination-bullet.custom-bullet.swiper-pagination-bullet-active .fill {
   width: 100%;
-  transition: width 5s linear;
+  transition: width 5s linear; /* matches autoplay delay */
 }
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-/* ================= FONTS ================= */
-
-@font-face {
-  font-family: "VT-Body";
-  src: url("./Assets/Degular_Fonts/Degular-Bold.otf");
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "VT-Display";
-  src: url("./Assets/beachday.regular.otf");
-  font-display: swap;
-}
-
-/* ================= GLOBAL BASE ================= */
-
-body {
-  font-family: "VT-Body", sans-serif;
-  background-color: #f9fafb;
-  color: #111827;
-}
-
-/* ================= HEADINGS ================= */
-
-/* Funky / Brand Heading (used on Products, About, Hero, etc.) */
-.HeroHeading {
-  font-family: "VT-Display", cursive;
-  letter-spacing: 0.04em;
-}
-
-/* Optional stroke effect (you already used it well) */
-.text-stroke {
-  -webkit-text-stroke: 1px white;
-}
-
-/* ================= SCROLLBAR ================= */
-
-/* Hide main scrollbar */
-#Frame::-webkit-scrollbar {
-  display: none;
-}
-#Frame {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-}
-
-/* Custom Scrollbar */
-#CustomScroll::-webkit-scrollbar {
-  width: 28px;
-}
-
-#CustomScroll::-webkit-scrollbar-thumb {
-  background: #9A1E85;
-  border-radius: 999px;
-  border: 9px solid rgba(0, 0, 0, 0);
-  background-clip: padding-box;
-}
-
-/* ================= INPUT FIXES ================= */
-
-/* Hide number input arrows */
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
-
-/* ================= SWIPER DOTS ================= */
-
-/* Base dot */
-.swiper-pagination-bullet.custom-bullet {
-  opacity: 0.8 !important;
-  width: 12px;
-  height: 12px;
-  background: #ffffff;
-  border-radius: 50px;
-  display: inline-block;
-  margin: 0 6px !important;
-  overflow: hidden;
-  position: relative;
-  top: 10px;
-}
-
-/* Inner fill animation */
-.swiper-pagination-bullet.custom-bullet .fill {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 0%;
-  height: 100%;
-  background: #02192F;
-  border-radius: 12px;
-  transition: width linear;
-}
-
-/* Active animation */
-.swiper-pagination-bullet.custom-bullet.swiper-pagination-bullet-active .fill {
-  width: 100%;
-  transition: width 5s linear;
-}
-
-/* Active cylinder effect */
+/* Cylinder effect */
 .swiper-pagination-bullet.custom-bullet.swiper-pagination-bullet-active {
   width: 24px;
   border-radius: 12px;
   transition: width 0.3s ease;
 }
 
-.scrollbar-hide::-webkit-scrollbar {
-    display: none;
+
+/* globals.css */
+.text-stroke {
+  -webkit-text-stroke: 1px white;
 }
-.scrollbar-hide {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
+
+
+
+
+
+
+
+
+
+
+/* ham menu navbar animation */
+.hamburger {
+  width: 40px;
+  height: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.hamburger span {
+  height: 6px;
+  width: 100%;
+  background: #ED0061;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+/* Animation to X */
+.hamburger.open span:nth-child(1) {
+  transform: rotate(45deg) translate(7px, 7px);
+}
+
+.hamburger.open span:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger.open span:nth-child(3) {
+  transform: rotate(-45deg) translate(8px, -8px);
 }

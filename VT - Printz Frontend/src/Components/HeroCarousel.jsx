@@ -3,9 +3,6 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
 import { Pagination, Autoplay } from "swiper/modules";
-import HeroTshirt from '../Assets/TShirt.png';
-import Capss from '../Assets/Capss.png';
-import poster from '../Assets/poster2.png';
 
 const HeroCarousel = () => {
   return (
@@ -14,22 +11,20 @@ const HeroCarousel = () => {
       autoplay={{ delay: 3000, disableOnInteraction: false }}
       loop
       pagination={{ clickable: true }}
-      className="w-full h-screen [&_.swiper-pagination]:hidden"
+      className="w-full h-screen [&_.swiper-pagination]:hidden hero-section"
     >
       {/* Slide 1 */}
       <SwiperSlide>
-        <section className="relative h-[80vh] w-full flex items-center justify-center bg-HeroImgSmall1 bg-cover bg-center bg-no-repeat">
+        <section className="relative h-[80vh] w-full flex items-center justify-center bg-HeroImgSmall1 bg-cover bg-center bg-no-repeat hero-height">
 
           <div className="absolute inset-0 bg-black/30"></div>
 
-
-
-          <div className="relative flex flex-col lg:flex-row items-center w-full min-h-screen overflow-hidden pt-[95px] sm:pt-[10px] px-6">
+          <div className="relative flex flex-col md:flex-row items-center w-full min-h-screen overflow-hidden pt-[95px] md:pt-0 px-6">
 
             {/* Left Content */}
-            <div className="flex flex-col items-start text-start w-full lg:w-[60%]">
+            <div className="flex flex-col items-start text-start w-full md:w-[70%] mmd:w-[60%]">
 
-              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-stroke HeroHeading text-[#205CCB] font-bold leading-tight">
+              <h1 className="text-4xl xxs:text-5xl sm:text-6xl lg:text-7xl text-stroke HeroHeading text-[#205CCB] font-bold leading-tight">
                 Custom Tees & Caps That Elevate Your Brand
               </h1>
 
@@ -58,19 +53,19 @@ const HeroCarousel = () => {
 
       {/* Slide 2 */}
       <SwiperSlide>
-        <section className="relative h-[80vh] w-full flex items-center justify-center bg-HeroImgSmall2 bg-cover bg-center bg-no-repeat">
+        <section className="relative h-[80vh] w-full flex items-center justify-center bg-HeroImgSmall2 bg-cover bg-center bg-no-repeat hero-height">
 
           <div className="absolute inset-0 bg-black/30"></div>
 
 
 
-          <div className="relative flex flex-col lg:flex-row items-center w-full min-h-screen overflow-hidden pt-[95px] sm:pt-[10px] px-6">
+          <div className="relative flex flex-col md:flex-row items-center w-full min-h-screen overflow-hidden pt-[95px] md:pt-0 px-6">
 
 
-            <div className="flex flex-col items-start text-start w-full lg:w-[60%]">
+            <div className="flex flex-col items-start text-start w-full md:w-[70%] mmd:w-[60%]">
 
-              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-stroke HeroHeading text-[#9A1E85] font-bold leading-tight">
-                Printed Mugs That Leave a Impression
+              <h1 className="text-4xl xxs:text-5xl sm:text-6xl lg:text-7xl text-stroke HeroHeading text-[#9A1E85] font-bold leading-tight">
+                Printed Mugs That Speak for Your Brand Image
               </h1>
 
 
@@ -97,18 +92,18 @@ const HeroCarousel = () => {
 
       {/* Slide 3 */}
       <SwiperSlide>
-        <section className="relative h-[80vh] w-full flex items-center justify-center bg-HeroImgSmall4 bg-cover bg-center bg-no-repeat">
+        <section className="relative h-[80vh] w-full flex items-center justify-center bg-HeroImgSmall4 bg-cover bg-center bg-no-repeat hero-height">
 
           <div className="absolute inset-0 bg-black/30"></div>
 
 
 
-          <div className="relative flex flex-col lg:flex-row items-center w-full min-h-screen overflow-hidden pt-[95px] sm:pt-[10px] px-6">
+          <div className="relative flex flex-col md:flex-row items-center w-full min-h-screen overflow-hidden pt-[95px] md:pt-0 px-6">
 
 
-            <div className="flex flex-col items-start text-start w-full lg:w-[55%]">
+            <div className="flex flex-col items-start text-start w-full md:w-[70%] mmd:w-[60%]">
 
-              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-stroke HeroHeading text-[#205CCB] font-bold leading-tight">
+              <h1 className="text-4xl xxs:text-5xl sm:text-6xl lg:text-7xl text-stroke HeroHeading text-[#205CCB] font-bold leading-tight">
                 Custom Carry Bags Keychains & Gifts That Build Brands
               </h1>
 
@@ -136,18 +131,18 @@ const HeroCarousel = () => {
 
       {/* Slide 4 */}
       <SwiperSlide>
-        <section className="relative h-[80vh] w-full flex items-center justify-center bg-HeroImgSmall3 bg-cover bg-center bg-no-repeat">
+        <section className="relative h-[80vh] w-full flex items-center justify-center bg-HeroImgSmall3 bg-cover bg-center bg-no-repeat hero-height">
 
           <div className="absolute inset-0 bg-black/30"></div>
 
 
 
-          <div className="relative flex flex-col lg:flex-row items-center w-full min-h-screen overflow-hidden pt-[95px] sm:pt-[10px] px-6">
+          <div className="relative flex flex-col md:flex-row items-center w-full min-h-screen overflow-hidden pt-[95px] md:pt-0 px-6">
 
 
-            <div className="flex flex-col items-start text-start w-full lg:w-[55%]">
+            <div className="flex flex-col items-start text-start w-full md:w-[70%] mmd:w-[60%]">
 
-              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-stroke HeroHeading text-[#9A1E85] font-bold leading-tight">
+              <h1 className="text-4xl xxs:text-5xl sm:text-6xl lg:text-7xl text-stroke HeroHeading text-[#9A1E85] font-bold leading-tight">
                 Print Visiting Card Banner & Flex That Get You Noticed
               </h1>
 

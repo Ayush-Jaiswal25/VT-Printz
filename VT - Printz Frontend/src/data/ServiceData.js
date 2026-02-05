@@ -5,7 +5,67 @@ import Letterheads from "../Assets/Printing_Services_Images/service_letterheads.
 import StickersAndLabels from "../Assets/Printing_Services_Images/service_stickersandlabels.png";
 import BillBooks from "../Assets/Printing_Services_Images/billbooks.png";
 import PrintedPens from "../Assets/Printing_Services_Images/printed_pens.png";
-import Envelops from "../Assets/Printing_Services_Images/envelops.png"
+import Envelops from "../Assets/Printing_Services_Images/envelops.png";
+import FilesAndFolders from "../Assets/Printing_Services_Images/files&folders.png";
+import GarmentsTag from "../Assets/Printing_Services_Images/garmentstag.png";
+import CardHolder from "../Assets/Printing_Services_Images/cardholder.png";
+import ShootingTargets from "../Assets/Printing_Services_Images/shooting targets.jpg";
+
+import Banners from "../Assets/Marketing_Materials_Images/custombanner.png";
+import Brochures from "../Assets/Marketing_Materials_Images/brochors.png";
+import TableTopTentCards from "../Assets/Marketing_Materials_Images/tabletent.jpg";
+import CustomRollUpStandees from "../Assets/Marketing_Materials_Images/image.png";
+
+
+
+import PinBoard from "../Assets/Office_Items_Images/pinboard.png";
+import PreInkedStamps from "../Assets/Office_Items_Images/preinkedstamps.png";
+import PromotionalCalendars from "../Assets/Office_Items_Images/promotionalcalenders.png";
+import PromotionalDiaries from "../Assets/Office_Items_Images/promotionaldiary.png";
+import PromotionalMugs from "../Assets/Office_Items_Images/promotionalmug.png";
+import RubberStamps from "../Assets/Office_Items_Images/rubberstamps.png";
+import SelfInkedStamp from "../Assets/Office_Items_Images/selfinkedstamp.png";
+import WhiteBoard from "../Assets/Office_Items_Images/whiteboard.png";
+
+
+import CanvasPhotoFrame from "../Assets/Photo_Frames_Images/canvasphotoframe.png";
+import ClassicPhotoFrame from "../Assets/Photo_Frames_Images/classicphotoframe.png";
+import FramelessPhotoFrame from "../Assets/Photo_Frames_Images/framelessphotoframe.png";
+import MattePhotoFrame from "../Assets/Photo_Frames_Images/mattephotoframe.png";
+import PersonalizedAcrylicPhotoFrame from "../Assets/Photo_Frames_Images/personalizedacrylicphotoframe.png";
+import WallPhotoFrame from "../Assets/Photo_Frames_Images/wallphotoframe.png";
+
+
+
+const marketingImages = {
+  "Banners": Banners,
+  "Brochures": Brochures,
+  "Table Top Tent Cards":TableTopTentCards,
+  "Custom Roll-Up Standees": CustomRollUpStandees,
+};
+
+
+const officeImages = {
+  "Rubber Stamps": RubberStamps,
+  "Self-Inked Stamps": SelfInkedStamp,
+  "Pre-Inked Stamps": PreInkedStamps,
+  "Pin Boards": PinBoard,
+  "White Boards": WhiteBoard,
+  "Promotional Diaries": PromotionalDiaries,
+  "Promotional Calendars": PromotionalCalendars,
+  "Promotional Mugs": PromotionalMugs,
+};
+
+
+const photoFrameImages = {
+  "Classic Photo Frames": ClassicPhotoFrame,
+  "Wall Photo Frames": WallPhotoFrame,
+  "Canvas Photo Frames": CanvasPhotoFrame,
+  "Matte Photo Frames": MattePhotoFrame,
+  "Personalized Acrylic Photo Frames": PersonalizedAcrylicPhotoFrame,
+  "Frameless Photo Frames": FramelessPhotoFrame,
+};
+
 
 export const servicesData = [
   {
@@ -123,7 +183,7 @@ export const servicesData = [
       {
         title: "Files / Folders",
         slug: "files-folders",
-        image: "https://picsum.photos/600/400?random=11",
+        image:FilesAndFolders,
         description: "Custom printed files and folders.",
         features: ["Professional finish", "Durable"],
         subcategories: [],
@@ -132,7 +192,7 @@ export const servicesData = [
       {
         title: "Garment Tags",
         slug: "garment-tags",
-        image: "https://picsum.photos/600/400?random=12",
+        image:GarmentsTag,
         description: "Printed garment tags for apparel.",
         features: ["Custom shapes", "Premium paper"],
         subcategories: [],
@@ -141,7 +201,7 @@ export const servicesData = [
       {
         title: "Card Holders",
         slug: "card-holders",
-        image: "https://picsum.photos/600/400?random=13",
+        image:CardHolder,
         description: "Business card holders.",
         features: ["Durable material", "Compact design"],
         subcategories: [],
@@ -150,7 +210,7 @@ export const servicesData = [
       {
         title: "Shooting Targets",
         slug: "shooting-targets",
-        image: "https://picsum.photos/600/400?random=14",
+        image:ShootingTargets,
         description: "Printed shooting targets.",
         features: ["High contrast", "Custom sizes"],
         subcategories: [],
@@ -169,10 +229,10 @@ export const servicesData = [
     ].map((title, index) => ({
       title,
       slug: title.toLowerCase().replace(/\s+/g, "-"),
-      image: `https://picsum.photos/600/400?random=${20 + index}`,
+      image: marketingImages[title],
       description: "Impactful marketing materials.",
       features: ["Vibrant colors", "Durable materials", "Custom branding"],
-      subcategories: [],
+      subcategories:[],
     })),
   },
 
@@ -191,7 +251,7 @@ export const servicesData = [
     ].map((title, index) => ({
       title,
       slug: title.toLowerCase().replace(/\s+/g, "-"),
-      image: `https://picsum.photos/600/400?random=${40 + index}`,
+      image: officeImages[title],
       description: "Branded office essentials.",
       features: ["Custom branding", "Bulk orders"],
       subcategories: [],
@@ -211,7 +271,7 @@ export const servicesData = [
     ].map((title, index) => ({
       title,
       slug: title.toLowerCase().replace(/\s+/g, "-"),
-      image: `https://picsum.photos/600/400?random=${60 + index}`,
+      image: photoFrameImages[title],
       description: "Beautiful photo frames.",
       features: ["Premium finish", "Custom sizes"],
       subcategories: [],

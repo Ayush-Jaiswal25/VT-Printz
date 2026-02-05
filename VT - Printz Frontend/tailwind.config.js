@@ -12,6 +12,7 @@ module.exports = {
         'xxxs': '430px',
         'ssm': '640px',
         'mmd': '850px',
+        'mmmd': '1010px',
         'llg': '1100px',
       },
       backgroundImage: {

@@ -58,33 +58,64 @@ const BubbleCylinderTestimonials = () => {
   const [activeIndex, setActiveIndex] = useState(1);
 
   return (
-    <section className="relative py-16
-     bg-gradient-to-b from-[#F7F8FF] to-[#EDEFFE] overflow-x-hidden
-     ">
-      <div className="max-w-6xl mx-auto px-6 text-center">
-        <h2 className="text-5xl font-extrabold text-[#01227F]">
+    <div>
+      <section className="mmd:hidden py-12 bg-gradient-to-b from-[#F7F8FF] to-[#EDEFFE]">
+  <h2 className="text-3xl font-extrabold text-[#01227F] text-center mb-2">
+    What Our <span className="text-[#DB2A7B]">Customers</span> Say
+  </h2>
+
+  <p className="text-gray-600 text-center mb-8">
+    Customer experiences that highlight our dedication to outstanding results.
+  </p>
+
+  <div className="flex gap-4 overflow-x-auto snap-x snap-mandatory pb-4 hidescroll">
+    {reviews.map((review, i) => (
+      <div
+        key={i}
+        className="snap-center min-w-[85%] bg-white rounded-3xl p-6 shadow-[0_20px_40px_rgba(0,0,0,0.25)]"
+      >
+        <h3 className="text-lg font-bold text-[#01227F]">{review.name}</h3>
+        <p className="text-gray-500 text-sm mb-3">{review.role}</p>
+
+        <p className="text-gray-700 mb-4">{review.text}</p>
+
+        <div className="flex gap-1">
+          {Array.from({ length: 5 }, (_, j) => (
+            <Star key={j} filled={j < review.rating} />
+          ))}
+        </div>
+      </div>
+    ))}
+  </div>
+</section>
+
+    
+    <section className="hidden mmd:flex relative justify-center py-16 bg-gradient-to-b from-[#F7F8FF] to-[#EDEFFE] px-4 mmmd:px-0 ">
+      <div className="flex justify-center w-full items-center flex-wrap md:max-w-6xl text-center ">
+
+        <h2 className="text-5xl font-extrabold text-[#01227F] w-full">
           What Our <span className="text-[#DB2A7B]">Customers</span> Say
         </h2>
 
         <p className="mb-12 text-gray-600">Customer experiences that highlight our dedication to outstanding results.</p>
 
-        <div className="flex justify-center items-center gap-6 perspective-[1000px]">
+        <div className="flex justify-center w-full items-center">
+          <div className="flex justify-center w-full items-center gap-6">
           {reviews.map((review, i) => {
             const distance = i - activeIndex;
             const isActive = i === activeIndex;
 
             // Cylinder effect for horizontal layout
-            
-            const width = isActive ? "620px" : "180px";
             const height = isActive ? "260px" : "260px";
             const opacity = isActive ? 1 : 0.8;
             const zIndex = isActive ? 20 : 10;
+
 
             return (
               <div
                 key={i}
                 onClick={() => setActiveIndex(i)}
-                className="
+                className={`
                 backdrop-blur-xl
               rounded-3xl 
               p-2
@@ -95,18 +126,15 @@ const BubbleCylinderTestimonials = () => {
               transform 
               hover:-translate-y-4
               hover:rotate-[0.8deg]
-                relative cursor-pointer transition-all duration-500  bg-white flex flex-col justify-between"
+              relative cursor-pointer transition-all duration-500  bg-white flex flex-col justify-between
+              ${isActive ? "md:w-[420px] lg:w-[420px]" : "md:w-[120px] lg:w-[180px]"}
+              `}
                 style={{
-                  // transform: `scale(${scale}) rotateY(${rotateY}deg)`,
-                  width: width,
                   minHeight: height,
                   opacity: opacity,
                   zIndex: zIndex,
                 }}
               >
-                
-                
-                
 
                 <div className="p-6 text-left">
                   <h3 className="text-lg font-bold text-[#01227F]">{review.name}</h3>
@@ -131,8 +159,11 @@ const BubbleCylinderTestimonials = () => {
             );
           })}
         </div>
+        </div>
       </div>
     </section>
+
+    </div>
   );
 };
 

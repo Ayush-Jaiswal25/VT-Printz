@@ -1,5 +1,6 @@
 import React from "react";
 import { FaFacebookF, FaInstagram, FaTwitter } from "react-icons/fa";
+import { Link } from "react-router-dom"
 
 const Footer = () => {
   return (
@@ -36,29 +37,34 @@ const Footer = () => {
           <div className="grid grid-cols-3 gap-6 text-sm">
             <div>
               <h4 className="text-[#DB2A7B] mb-2">Company</h4>
-              <p>About Us</p>
-              <p>Location</p>
+               <Link to="/about-us"><p>About Us</p></Link>
+              <Link to="/location"><p>Location</p></Link>
               <p>Blog</p>
             </div>
 
             <div>
               <h4 className="text-[#DB2A7B] mb-2">Support</h4>
-              <p>FAQs</p>
+              <Link to="/faq"><p>FAQ</p></Link>
               <p>Contact</p>
             </div>
 
             <div>
               <h4 className="text-[#DB2A7B] mb-2">Quick Links</h4>
-              <p>Home</p>
-              <p>Products</p>
-              <p>Feedback</p>
+              <Link to="/"><p>Home</p></Link>
+              <Link to="/products"><p>Products</p></Link>
+              <Link to="/feedback-list"><p>Feedback</p></Link>
             </div>
           </div>
         </div>
 
-        <div className="mt-6 pt-4 border-t border-white/20 text-xs flex justify-between">
-          <p>© 2026 VT Printz</p>
-          <p>Privacy · Terms · Refund</p>
+        <div className="mt-6 pt-4 border-t border-white/20 text-xs flex justify-between flex-wrap">
+          <p className="hidden sm:flex">© 2026 VT Printz</p>
+          <p className="sm:space-x-10 flex justify-between w-full sm:w-auto">
+            <Link to="/privacy-policy">Privacy Policy</Link>
+            <Link to="/terms-of-service">Terms of Service</Link>
+            <Link to="/Cancelation-Policy">Refund Policy</Link>
+          </p>
+          <p className="sm:hidden flex w-full justify-center pt-4">© 2026 VT Printz</p>
         </div>
 
       </footer>
