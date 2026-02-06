@@ -1,0 +1,145 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: VT-Font;
+  src: url(./Assets/Degular_Fonts/Degular-Bold.otf);
+}
+
+@font-face {
+  font-family: VT-Hero-Heading-Font;
+  src: url(./Assets/beachday.regular.otf);
+}
+
+*{
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  text-decoration: none;
+  font-family: VT-Font;
+}
+
+.HeroHeading{
+  font-family: VT-Hero-Heading-Font;
+}
+
+
+/* To Hide main scrollbar */
+#Frame::-webkit-scrollbar{ display: none; }
+#Frame{ -ms-overflow-style: none; }
+
+.hidescroll::-webkit-scrollbar{ display: none; }
+.hidescroll{ -ms-overflow-style: none; }
+
+/* To Hide Number Input arrows */
+input::-webkit-outer-spin-button, input::-webkit-inner-spin-button { 
+  -webkit-appearance: none;
+  margin: 0; 
+}
+
+/* Custom Scroll Bar */
+/* width */
+#CustomScroll::-webkit-scrollbar {
+  width: 28px;
+}
+#CustomScroll::-webkit-scrollbar-thumb {
+  background: #9A1E85   ;
+  border-radius: 999px;
+  border: 9px solid rgba(0, 0, 0, 0);
+  background-clip: padding-box;
+}
+
+
+
+
+
+
+/* Base dot */
+.swiper-pagination-bullet.custom-bullet {
+  opacity: 0.8 !important;  /* force fully opaque */
+  width: 12px;
+  height: 12px;
+  background: #fff; /* background circle */
+  border-radius: 50px;
+  display: inline-block;
+  margin: 0 6px !important;
+  overflow: hidden;
+  position: relative;
+  top: 10px
+}
+
+
+/* Inner fill element */
+.swiper-pagination-bullet.custom-bullet .fill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0%; /* will grow to 100% */
+  height: 100%;
+  background: #02192F;
+  border-radius: 12px;
+  transition: width linear;
+}
+
+/* Active dot triggers fill animation */
+.swiper-pagination-bullet.custom-bullet.swiper-pagination-bullet-active .fill {
+  width: 100%;
+  transition: width 5s linear; /* matches autoplay delay */
+}
+
+/* Cylinder effect */
+.swiper-pagination-bullet.custom-bullet.swiper-pagination-bullet-active {
+  width: 24px;
+  border-radius: 12px;
+  transition: width 0.3s ease;
+}
+
+
+/* globals.css */
+.text-stroke {
+  -webkit-text-stroke: 1px white;
+}
+
+
+
+
+
+
+
+
+
+
+/* ham menu navbar animation */
+.hamburger {
+  width: 40px;
+  height: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.hamburger span {
+  height: 6px;
+  width: 100%;
+  background: #ED0061;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+/* Animation to X */
+.hamburger.open span:nth-child(1) {
+  transform: rotate(45deg) translate(7px, 7px);
+}
+
+.hamburger.open span:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger.open span:nth-child(3) {
+  transform: rotate(-45deg) translate(8px, -8px);
+}
