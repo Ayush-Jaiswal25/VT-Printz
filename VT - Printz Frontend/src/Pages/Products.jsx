@@ -1,59 +1,30 @@
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-
-import Billboard from "../Assets/printing.jpg";
-import Stamps from "../Assets/office.jpg";
-import Photo from "../Assets/photo.jpg";
-import Wedding from "../Assets/invitation.jpg";
-import Tote from "../Assets/packaging.jpg";
-import Ticket from "../Assets/event.jpg";
-import Seven from "../Assets/id.jpg";
-import Delivery from "../Assets/markiting.jpg";
-
-const PRODUCTS = [
-  {
-    img: Billboard,
-    label: "Printing Services",
-    slug: "printing-services",
-  },
-  {
-    img: Delivery,
-    label: "Marketing Materials",
-    slug: "marketing-materials",
-  },
-  {
-    img: Stamps,
-    label: "Office Items",
-    slug: "office-items",
-  },
-  {
-    img: Photo,
-    label: "Photo Frames",
-    slug: "photo-frames",
-  },
-  {
-    img: Wedding,
-    label: "Invitations & Cards",
-    slug: "invitations-cards",
-  },
-  {
-    img: Tote,
-    label: "Packaging Solutions",
-    slug: "packaging-solutions",
-  },
-  {
-    img: Ticket,
-    label: "Tickets & Event Cards",
-    slug: "tickets-event-cards",
-  },
-  {
-    img: Seven,
-    label: "ID Cards & Accessories",
-    slug: "corporate-id-cards-accessories",
-  },
-];
+import axios from 'axios';
+import { Loader2 } from 'lucide-react';
 
 const Products = () => {
   const navigate = useNavigate();
+  const [categories, setCategories] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  // Fetch Categories
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        // We can use the simple categories endpoint or full catalog. 
+        // Full catalog gives us images too if they are stored on the category object.
+        // But simpler endpoint is lighter. Let's use full catalog to be consistent with images.
+        const res = await axios.get("http://localhost:5000/api/catalog/full-catalog");
+        setCategories(res.data);
+      } catch (error) {
+        console.error("Failed to load products:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchData();
+  }, []);
 
   const ProductCard = ({ img, label, slug }) => (
     <div
@@ -67,8 +38,9 @@ const Products = () => {
       "
     >
       <div className="p-6">
+        {/* Fallback image if category has no image */}
         <img
-          src={img}
+          src={img || "https://placehold.co/400x300?text=No+Image"}
           alt={label}
           className="w-full h-40 object-cover rounded-xl"
         />
@@ -81,6 +53,14 @@ const Products = () => {
       </div>
     </div>
   );
+
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center pt-28">
+        <Loader2 className="animate-spin text-[#DB2A7B]" size={48} />
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-gray-100 pt-28 px-4 sm:px-10">
@@ -96,8 +76,13 @@ const Products = () => {
 
       <div className="max-w-7xl mx-auto p-10">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-          {PRODUCTS.map((product, index) => (
-            <ProductCard key={index} {...product} />
+          {categories.map((cat, index) => (
+            <ProductCard
+              key={index}
+              img={cat.image}
+              label={cat.category}
+              slug={cat.categorySlug}
+            />
           ))}
         </div>
       </div>

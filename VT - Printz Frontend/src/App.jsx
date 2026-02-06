@@ -9,6 +9,7 @@ import Navbar from './Components/Navbar.jsx'
 import Footer from './Components/Footer.jsx'
 import Home from './Pages/Home.jsx'
 import About from './Pages/AboutUs.jsx'
+import Contact from './Pages/Contact.jsx'
 import ServicesPage from './Pages/ServicesPage.jsx'
 import ServiceDetail from './Pages/ServiceDetails.jsx'
 import ServiceCategoryPage from './Pages/ServiceCategory.jsx'
@@ -42,8 +43,10 @@ function App() {
           <Route path='/about-us' element={<About />} />
           <Route path='/card-drawer' element={<CartDrawer />} />
           <Route path='/products' element={<Products />} />
+          <Route path='/contact-us' element={<Contact />} />
           <Route path='/product-list' element={<ProductList />} />
           <Route path='/product-page' element={<ProductPage />} />
+          
           {/* ✅ QUERY BASED SERVICES PAGE */}
           <Route path="/services" element={<ServicesPage />} />
           <Route path="/feedback-form" element={<FeedbackForm />} />
