@@ -1,7 +1,7 @@
 import React from "react";
-import { useLocation, useSearchParams } from "react-router-dom";
+import { useLocation, useSearchParams, useNavigate } from "react-router-dom";
 import { MyContext } from "../ContextAPI.jsx";
-import { X, ChevronLeft, ChevronRight } from "lucide-react";
+import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 
 const shapeOptions = ["Logo Cutout", "Circle", "Square"];
 const packOptions = [10, 20, 50, 100, "3 Pieces Sample"];
@@ -11,6 +11,7 @@ function ProviderProductDetail() {
   const location = useLocation();
   const [params] = useSearchParams();
 
+  console.log("Location State:", location.state);
   const stateItem = location.state?.item;
   const queryItem = {
     name: params.get("name"),
@@ -43,10 +44,40 @@ function ProviderProductDetail() {
   const qty = typeof pack === "number" ? pack : 3;
   const total = basePrice * qty;
 
-  const onAddToCart = () => {
-    const title = `${name} | ${shape} | ${qty} Pcs`;
-    addToCart && addToCart({ name: title, price: total, quantity: 1 });
-    shareCartOnWhatsApp && shareCartOnWhatsApp();
+  const [loading, setLoading] = React.useState(false);
+  const navigate = useNavigate();
+
+  const onAddToCart = async () => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      alert("Please login to add items to cart");
+      navigate("/login-and-signup");
+      return;
+    }
+
+    const productId = baseItem?._id;
+    if (!productId) {
+      alert("Product ID not found. Please navigate from the product list.");
+      return;
+    }
+
+    setLoading(true);
+    try {
+      // qty is the number of pieces (e.g. 10, 20)
+      // Assuming backend Product price is per piece
+      await import("axios").then(axios =>
+        axios.default.post("http://localhost:5000/api/cart/add",
+          { productId, quantity: qty },
+          { headers: { "auth-token": token } })
+      );
+
+      alert("Added to cart successfully!");
+    } catch (err) {
+      console.error(err);
+      alert("Failed to add to cart");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -79,10 +110,10 @@ function ProviderProductDetail() {
             </div>
           )}
           <div className="absolute left-2 top-1/2 -translate-y-1/2 bg-white rounded-full p-2 shadow">
-            <ChevronLeft size={16} />
+            <FaChevronLeft size={16} />
           </div>
           <div className="absolute right-2 top-1/2 -translate-y-1/2 bg-white rounded-full p-2 shadow">
-            <ChevronRight size={16} />
+            <FaChevronRight size={16} />
           </div>
         </div>
         <div className="space-y-4">
@@ -135,8 +166,8 @@ function ProviderProductDetail() {
             <div className="text-lg font-semibold">Total: ₹{total}</div>
           </div>
           <div>
-            <button onClick={onAddToCart} className="w-full bg-[#DB2A7B] text-white font-semibold py-3 rounded-lg active:scale-95">
-              ADD TO CART
+            <button onClick={onAddToCart} disabled={loading} className="w-full bg-[#DB2A7B] text-white font-semibold py-3 rounded-lg active:scale-95 disabled:opacity-50">
+              {loading ? "ADDING..." : "ADD TO CART"}
             </button>
           </div>
         </div>

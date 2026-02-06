@@ -57,6 +57,7 @@ import feedbackRoutes from './routes/feedback.routes.js';
 import contactRoutes from './routes/contact.routes.js';
 import productRoutes from './routes/product.routes.js';
 import authRoutes from "./routes/auth.routes.js";
+import cartRoutes from "./routes/cart.routes.js";
 
 
 
@@ -87,6 +88,7 @@ vtPrintzBackend.use('/api/feedback', feedbackRoutes);
 vtPrintzBackend.use('/api/contact', contactRoutes);
 vtPrintzBackend.use('/api/catalog', productRoutes); // Prefixing all hierarchy routes with /api/catalog
 vtPrintzBackend.use("/api/auth", authRoutes);
+vtPrintzBackend.use("/api/cart", cartRoutes);
 
 vtPrintzBackend.get('/', (req, res) => {
     res.status(200).json({

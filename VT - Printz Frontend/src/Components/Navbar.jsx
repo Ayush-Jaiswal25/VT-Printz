@@ -141,6 +141,7 @@ const Navbar = () => {
                         navigate("/provider-product", {
                           state: {
                             item: {
+                              _id: product._id,
                               name: product.name,
                               category: product.serviceId?.name || "Custom",
                               price: product.discountedPrice || product.price,

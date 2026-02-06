@@ -25,11 +25,15 @@ function LoginAndSignup() {
   const [showOtp, setShowOtp] = useState(false);
 
   // Message
-  const [message, setMessage] = useState("");
+  const [loginMessage, setLoginMessage] = useState("");
+  const [signupMessage, setSignupMessage] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   /* ---------------- SIGNUP ---------------- */
   const handleSignup = async (e) => {
     e.preventDefault();
+    setIsLoading(true);
+    setSignupMessage("");
 
     try {
       const res = await axios.post(
@@ -37,15 +41,18 @@ function LoginAndSignup() {
         signupData
       );
 
-      setMessage(res.data.message);
+      setSignupMessage(res.data.message);
       setShowOtp(true);
     } catch (err) {
-      setMessage(err.response?.data?.message || "Signup failed");
+      setSignupMessage(err.response?.data?.message || "Signup failed");
+    } finally {
+      setIsLoading(false);
     }
   };
 
   /* ---------------- OTP VERIFY ---------------- */
   const verifyOtp = async () => {
+    setIsLoading(true);
     try {
       const res = await axios.post(
         "http://localhost:5000/api/auth/verify-otp",
@@ -55,25 +62,35 @@ function LoginAndSignup() {
         }
       );
 
-      setMessage(res.data.message);
+      setSignupMessage(res.data.message);
       setShowOtp(false);
 
-      // 👉 Switch to Login after OTP
-      setIsLogin(true);
+      // Auto-login: If backend returns token, save it and redirect
+      if (res.data.token) {
+        localStorage.setItem("token", res.data.token);
+        navigate("/");
+      } else {
+        // Fallback to login form if no token
+        setIsLogin(true);
+        // Prefill login email
+        setLoginData((prev) => ({
+          ...prev,
+          email: signupData.email,
+        }));
+      }
 
-      // 👉 Prefill login email
-      setLoginData((prev) => ({
-        ...prev,
-        email: signupData.email,
-      }));
     } catch (err) {
-      setMessage(err.response?.data?.message || "Invalid OTP");
+      setSignupMessage(err.response?.data?.message || "Invalid OTP");
+    } finally {
+      setIsLoading(false);
     }
   };
 
   /* ---------------- LOGIN ---------------- */
   const handleLogin = async (e) => {
     e.preventDefault();
+    setIsLoading(true);
+    setLoginMessage("");
 
     try {
       const res = await axios.post(
@@ -81,7 +98,7 @@ function LoginAndSignup() {
         loginData
       );
 
-      setMessage(res.data.message);
+      setLoginMessage(res.data.message);
 
       // 👉 OPTIONAL: save token if backend sends it
       if (res.data.token) {
@@ -91,7 +108,9 @@ function LoginAndSignup() {
       // 👉 Redirect to Home page
       navigate("/");
     } catch (err) {
-      setMessage(err.response?.data?.message || "Login failed");
+      setLoginMessage(err.response?.data?.message || "Login failed");
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -101,9 +120,8 @@ function LoginAndSignup() {
 
         {/* SLIDING PANEL */}
         <div
-          className={`absolute top-0 left-0 h-full w-1/2 bg-[#DB2A7B] text-white flex flex-col items-center justify-center transition-transform duration-700 ease-in-out z-20 ${
-            isLogin ? "translate-x-0" : "translate-x-full"
-          }`}
+          className={`absolute top-0 left-0 h-full w-1/2 bg-[#DB2A7B] text-white flex flex-col items-center justify-center transition-transform duration-700 ease-in-out z-20 ${isLogin ? "translate-x-0" : "translate-x-full"
+            }`}
         >
           <h2 className="text-4xl font-bold mb-4">
             {isLogin ? "Welcome Back!" : "Hello, Friend!"}
@@ -114,7 +132,11 @@ function LoginAndSignup() {
               : "Sign up and start your journey with us"}
           </p>
           <button
-            onClick={() => setIsLogin(!isLogin)}
+            onClick={() => {
+              setIsLogin(!isLogin);
+              setLoginMessage("");
+              setSignupMessage("");
+            }}
             className="border border-white px-8 py-2 rounded-full hover:bg-white hover:text-[#DB2A7B] transition"
           >
             {isLogin ? "Login" : "Sign Up"}
@@ -149,13 +171,13 @@ function LoginAndSignup() {
                 }
               />
 
-              <button className="w-full bg-[#DB2A7B] text-white py-3 rounded-lg">
-                Login
+              <button disabled={isLoading} className="w-full bg-[#DB2A7B] text-white py-3 rounded-lg disabled:opacity-50">
+                {isLoading ? "Logging in..." : "Login"}
               </button>
 
-              {message && (
+              {loginMessage && (
                 <p className="text-center text-sm text-red-600 mt-2">
-                  {message}
+                  {loginMessage}
                 </p>
               )}
             </form>
@@ -196,9 +218,15 @@ function LoginAndSignup() {
                 }
               />
 
-              <button className="w-full bg-[#DB2A7B] text-white py-3 rounded-lg">
-                Sign Up
+              <button disabled={isLoading} className="w-full bg-[#DB2A7B] text-white py-3 rounded-lg disabled:opacity-50">
+                {isLoading ? "Signing up..." : "Sign Up"}
               </button>
+
+              {signupMessage && (
+                <p className="text-center text-sm text-red-600 mt-2">
+                  {signupMessage}
+                </p>
+              )}
             </form>
           </div>
 

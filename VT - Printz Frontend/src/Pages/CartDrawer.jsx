@@ -1,45 +1,93 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 function CartDrawer({ onClose }) {
-  const [cartItems, setCartItems] = useState([
-    {
-      id: 1,
-      name: "Customized Polo T-Shirt",
-      subtitle: "5 Pcs / Black",
-      price: 3350,
-      oldPrice: 3850,
-      qty: 1,
-      image: "https://via.placeholder.com/80",
-    },
-  ]);
+  const navigate = useNavigate();
+  const [cartItems, setCartItems] = useState([]);
+  const [loading, setLoading] = useState(false);
+
+  // Fetch Cart
+  useEffect(() => {
+    fetchCart();
+  }, []);
+
+  const fetchCart = async () => {
+    const token = localStorage.getItem("token");
+    if (!token) return;
+
+    setLoading(true);
+    try {
+      const res = await axios.get("http://localhost:5000/api/cart/get", {
+        headers: { "auth-token": token },
+      });
+      setCartItems(res.data);
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    onClose();
+    navigate("/login-and-signup");
+  };
+
+  const updateQty = async (id, type) => {
+    const token = localStorage.getItem("token");
+    try {
+      const res = await axios.post(
+        "http://localhost:5000/api/cart/update",
+        { productId: id, type },
+        { headers: { "auth-token": token } }
+      );
+      setCartItems(res.data.cart);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  const removeItem = async (id) => {
+    const token = localStorage.getItem("token");
+    try {
+      const res = await axios.post(
+        "http://localhost:5000/api/cart/remove",
+        { productId: id },
+        { headers: { "auth-token": token } }
+      );
+      setCartItems(res.data.cart);
+    } catch (err) {
+      console.error(err);
+    }
+  };
 
   const isEmpty = cartItems.length === 0;
 
-  const updateQty = (id, type) => {
-    setCartItems((prev) =>
-      prev.map((item) =>
-        item.id === id
-          ? {
-              ...item,
-              qty: type === "inc"
-                ? item.qty + 1
-                : Math.max(1, item.qty - 1),
-            }
-          : item
-      )
-    );
-  };
-
-  const removeItem = (id) => {
-    setCartItems((prev) => prev.filter((item) => item.id !== id));
-  };
-
   const subtotal = cartItems.reduce(
-    (sum, item) => sum + item.price * item.qty,
+    (sum, item) => sum + (item.productId?.discountedPrice || item.productId?.originalPrice || 0) * item.quantity,
     0
   );
 
-  const discount = subtotal * 0.12;
+  const discount = subtotal > 999 ? subtotal * 0.12 : 0;
+  const finalTotal = subtotal - discount;
+
+  const handleCheckout = () => {
+    let message = "Hello, I want to place an order:%0A%0A";
+
+    cartItems.forEach((item, index) => {
+      const price = item.productId?.discountedPrice || item.productId?.originalPrice || 0;
+      message += `${index + 1}. ${item.productId?.name} (x${item.quantity}) - ₹${price * item.quantity}%0A`;
+    });
+
+    message += `%0ASubtotal: ₹${subtotal}`;
+    message += `%0ADiscount: -₹${discount.toFixed(0)}`;
+    message += `%0A*Total Amount: ₹${finalTotal.toFixed(0)}*`;
+    message += "%0A%0APlease confirm my order.";
+
+    window.open(`https://wa.me/919589304135?text=${message}`, "_blank");
+  };
 
   return (
     <>
@@ -65,7 +113,15 @@ function CartDrawer({ onClose }) {
         {/* HEADER */}
         <div className="flex items-center justify-between px-5 py-4 border-b">
           <h2 className="text-lg font-semibold">SHOPPING CART</h2>
-          <button onClick={onClose} className="text-xl">✕</button>
+          <div className="flex items-center gap-4">
+            <button
+              onClick={handleLogout}
+              className="text-xs font-bold text-red-500 border border-red-500 px-2 py-1 rounded hover:bg-red-50 transition"
+            >
+              LOGOUT
+            </button>
+            <button onClick={onClose} className="text-xl">✕</button>
+          </div>
         </div>
 
         {/* PROMO */}
@@ -74,15 +130,17 @@ function CartDrawer({ onClose }) {
         </div>
 
         {/* CONTENT */}
-        <div className="flex flex-col overflow-y-auto">
-          {isEmpty ? (
-            <div className="flex-1 flex flex-col items-center justify-center text-center px-6">
+        <div className="flex flex-col overflow-y-auto h-[calc(100vh-200px)]">
+          {loading ? (
+            <div className="flex items-center justify-center p-10">Loading cart...</div>
+          ) : isEmpty ? (
+            <div className="flex-1 flex flex-col items-center justify-center text-center px-6 mt-10">
               <h3 className="text-lg font-semibold mb-1">
                 Your cart is empty
               </h3>
               <button
                 onClick={onClose}
-                className="bg-[#DB2A7B] text-white px-6 py-2 rounded-lg"
+                className="bg-[#DB2A7B] text-white px-6 py-2 rounded-lg mt-4"
               >
                 Continue Shopping
               </button>
@@ -90,41 +148,38 @@ function CartDrawer({ onClose }) {
           ) : (
             <div className="p-5 space-y-6">
               {cartItems.map((item) => (
-                <div key={item.id} className="flex gap-4">
+                <div key={item._id} className="flex gap-4">
                   <img
-                    src={item.image}
-                    alt={item.name}
-                    className="w-20 h-20 rounded-lg border"
+                    src={item.productId?.image || "https://via.placeholder.com/80"}
+                    alt={item.productId?.name}
+                    className="w-20 h-20 rounded-lg border object-cover"
                   />
 
                   <div className="flex-1">
-                    <h4 className="font-semibold text-sm">{item.name}</h4>
-                    <p className="text-xs text-gray-500">{item.subtitle}</p>
+                    <h4 className="font-semibold text-sm line-clamp-2">{item.productId?.name}</h4>
+                    <p className="text-xs text-gray-500">{item.productId?.category}</p>
 
                     <div className="flex items-center gap-2 mt-2">
                       <span className="text-red-600 font-semibold">
-                        ₹ {item.price}
-                      </span>
-                      <span className="text-gray-400 line-through text-xs">
-                        ₹ {item.oldPrice}
+                        ₹ {item.productId?.discountedPrice || item.productId?.originalPrice || 0}
                       </span>
                     </div>
 
                     <div className="flex items-center gap-3 mt-3">
                       <div className="flex border rounded-full">
                         <button
-                          onClick={() => updateQty(item.id, "dec")}
-                          className="px-3"
+                          onClick={() => updateQty(item.productId._id, "dec")}
+                          className="px-3 hover:bg-gray-100 rounded-l-full"
                         >−</button>
-                        <span className="px-4 text-sm">{item.qty}</span>
+                        <span className="px-4 text-sm flex items-center">{item.quantity}</span>
                         <button
-                          onClick={() => updateQty(item.id, "inc")}
-                          className="px-3"
+                          onClick={() => updateQty(item.productId._id, "inc")}
+                          className="px-3 hover:bg-gray-100 rounded-r-full"
                         >+</button>
                       </div>
 
                       <button
-                        onClick={() => removeItem(item.id)}
+                        onClick={() => removeItem(item.productId._id)}
                         className="text-gray-400 hover:text-red-500"
                       >
                         🗑
@@ -139,19 +194,26 @@ function CartDrawer({ onClose }) {
 
         {/* FOOTER */}
         {!isEmpty && (
-          <div className="border-t p-5 space-y-3">
+          <div className="absolute bottom-0 left-0 w-full bg-white border-t p-5 space-y-3 shadow-[0_-5px_15px_rgba(0,0,0,0.05)]">
             <div className="flex justify-between text-sm text-red-600">
-              <span>12% off on order above ₹999</span>
+              <span>{subtotal > 999 ? "12% off applied" : "Add more for 12% off"}</span>
               <span>- ₹ {discount.toFixed(0)}</span>
             </div>
 
-            <div className="flex justify-between font-semibold">
+            <div className="flex justify-between font-semibold text-lg">
               <span>Total</span>
-              <span>₹ {(subtotal - discount).toFixed(0)}</span>
+              <span>₹ {finalTotal.toFixed(0)}</span>
             </div>
 
-            <button className="w-full bg-black text-white py-3 rounded-xl">
-              BUY NOW
+            <button
+              onClick={handleCheckout}
+              className="w-full bg-[#25D366] hover:bg-[#128C7E] transition text-white py-3 rounded-xl font-bold flex items-center justify-center gap-2"
+            >
+              Order on WhatsApp
+              {/* WhatsApp Icon */}
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+                <path d="M13.601 2.326A7.854 7.854 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.933 7.933 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.898 7.898 0 0 0 13.6 2.326zM7.994 14.521a6.573 6.573 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.557 6.557 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592z" />
+              </svg>
             </button>
           </div>
         )}
