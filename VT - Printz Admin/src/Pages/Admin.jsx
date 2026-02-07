@@ -485,7 +485,7 @@ function Admin() {
     setProviderError("");
     try {
       const res = await axios.get(
-        `http://localhost:5000/api/products?search=${encodeURIComponent(
+        `${import.meta.env.VITE_API_URL}/api/products?search=${encodeURIComponent(
           providerQuery
         )}`
       );

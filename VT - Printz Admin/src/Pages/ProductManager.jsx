@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { ArrowLeft, Plus, Trash2, Folder, Layers, Package, Image as ImageIcon, Loader2 } from 'lucide-react';
 
-const API_BASE = "http://localhost:5000/api/catalog";
+const API_BASE = `${import.meta.env.VITE_API_URL}/api/catalog`;
 
 const ProductManager = () => {
     // State: view = 'categories' | 'services' | 'products'
