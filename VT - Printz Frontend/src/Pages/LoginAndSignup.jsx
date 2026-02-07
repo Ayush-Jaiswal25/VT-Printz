@@ -68,6 +68,23 @@ function LoginAndSignup() {
       // Auto-login: If backend returns token, save it and redirect
       if (res.data.token) {
         localStorage.setItem("token", res.data.token);
+
+        // CHECK PENDING CART ITEM
+        const pendingItemStr = localStorage.getItem('pendingCartItem');
+        if (pendingItemStr) {
+          try {
+            const pendingItem = JSON.parse(pendingItemStr);
+            await axios.post("http://localhost:5000/api/cart/add",
+              { productId: pendingItem.productId, quantity: pendingItem.quantity },
+              { headers: { "auth-token": res.data.token } }
+            );
+            localStorage.removeItem('pendingCartItem');
+            alert("Item added to cart from your previous session!");
+          } catch (e) {
+            console.error("Failed to add pending item", e);
+          }
+        }
+
         navigate("/");
       } else {
         // Fallback to login form if no token
@@ -103,6 +120,22 @@ function LoginAndSignup() {
       // 👉 OPTIONAL: save token if backend sends it
       if (res.data.token) {
         localStorage.setItem("token", res.data.token);
+
+        // CHECK PENDING CART ITEM
+        const pendingItemStr = localStorage.getItem('pendingCartItem');
+        if (pendingItemStr) {
+          try {
+            const pendingItem = JSON.parse(pendingItemStr);
+            await axios.post("http://localhost:5000/api/cart/add",
+              { productId: pendingItem.productId, quantity: pendingItem.quantity },
+              { headers: { "auth-token": res.data.token } }
+            );
+            localStorage.removeItem('pendingCartItem');
+            alert("Item added to cart from your previous session!");
+          } catch (e) {
+            console.error("Failed to add pending item", e);
+          }
+        }
       }
 
       // 👉 Redirect to Home page

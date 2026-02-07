@@ -39,7 +39,7 @@ const Footer = () => {
               <h4 className="text-[#DB2A7B] mb-2">Company</h4>
               <Link to="/about-us"><p>About Us</p></Link>
               <Link to="/location"><p>Location</p></Link>
-              <p>Blog</p>
+              <Link to="/blog"><p>Blog</p></Link>
             </div>
 
             <div>

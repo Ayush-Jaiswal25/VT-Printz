@@ -26,6 +26,7 @@ import FAQ from './Components/FAQ.jsx';
 import ProviderProductDetail from './Pages/ProviderProductDetail.jsx';
 import LoginAndSignup from './Pages/LoginAndSignup.jsx';
 import CartDrawer from './Pages/CartDrawer.jsx';
+import Blog from './Pages/Blog.jsx';
 
 function App() {
   const location = useLocation();
@@ -58,6 +59,7 @@ function App() {
           <Route path="/contact" element={<Contact />} />
           <Route path="/faq" element={<FAQ />} />
           <Route path="/Cancelation-Policy" element={<CancellationRefundPolicy />} />
+          <Route path="/blog" element={<Blog />} />
           {/* ✅ CATEGORY / SERVICE FLOW */}
           <Route path="/services/:categorySlug" element={<ServiceCategoryPage />} />
           <Route path="/services/:categorySlug/:serviceSlug" element={<ServiceCategoryPage />} />

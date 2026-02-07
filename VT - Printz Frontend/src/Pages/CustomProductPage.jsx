@@ -2,10 +2,12 @@ import React, { useState, useRef, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { Loader2 } from 'lucide-react';
+import { MyContext } from '../ContextAPI';
 
 const CustomProductPage = () => {
   const { categorySlug, serviceSlug, subSlug } = useParams();
   const navigate = useNavigate();
+  const { fetchCartCount } = React.useContext(MyContext) || {};
 
   const [catalogData, setCatalogData] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -60,19 +62,41 @@ const CustomProductPage = () => {
     }
   };
 
-  const handleAddToCart = () => {
-    const phoneNumber = "9986254825"; // Replace with your WhatsApp number
-    const message = `
-      I'm interested in the following product:
-      *Product:* ${product.title}
-      *Shape:* ${selectedShape}
-      *Quantity:* ${selectedQuantity}
-      *Price:* ₹${product.discountedPrice}
-      *Uploaded File:* ${uploadedFile ? uploadedFile.name : 'None'}
-      *Customization:* ${customizationText || 'None'}
-    `;
-    const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
-    window.open(whatsappUrl, '_blank');
+  const handleAddToCart = async () => {
+    const token = localStorage.getItem('token');
+    const productId = product?._id;
+    const qty = parseInt(selectedQuantity) || 1;
+
+    if (!productId) {
+      alert("Product ID not found.");
+      return;
+    }
+
+    if (!token) {
+      const pendingItem = {
+        type: 'custom',
+        productId,
+        quantity: qty,
+        // We can't easily store the file, so we might lose it or have to handle it differently.
+        // For now, we'll store basic info and user might need to re-upload if logic requires file.
+      };
+      localStorage.setItem('pendingCartItem', JSON.stringify(pendingItem));
+      alert("Please login to add to cart.");
+      navigate("/login-and-signup");
+      return;
+    }
+
+    try {
+      await axios.post("http://localhost:5000/api/cart/add",
+        { productId, quantity: qty },
+        { headers: { "auth-token": token } }
+      );
+      alert("Added to cart successfully!");
+      if (fetchCartCount) fetchCartCount();
+    } catch (error) {
+      console.error(error);
+      alert("Failed to add to cart");
+    }
   };
 
   if (!product) {

@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate, useSearchParams, useLocation } from "react-router-dom";
 import axios from "axios";
+import { MyContext } from "../ContextAPI.jsx";
 
-import VTLogo from "../../public/VT_LogoTSC.png";
+
 import ArrowDown from "../Assets/next_W.png";
 import Search from "../Assets/search.png";
 import CartIcon from "../Assets/cart1.png";
@@ -18,7 +19,8 @@ const Navbar = () => {
   const [productsOpen, setProductsOpen] = useState(false);
   const [mobileProductsOpen, setMobileProductsOpen] = useState(false);
   const [showCart, setShowCart] = useState(false);
-  const [cartCount] = useState(1);
+  const { cartCount, fetchCartCount } = React.useContext(MyContext);
+
   const [activeLink, setActiveLink] = useState("");
   const [searchText, setSearchText] = useState("");
   const [results, setResults] = useState([]);
@@ -26,6 +28,10 @@ const Navbar = () => {
   const navigate = useNavigate();
   const closeMenu = () => setMenuOpen(false);
   const location = useLocation();
+
+  useEffect(() => {
+    fetchCartCount();
+  }, [location.pathname]);
 
   // Sync Search Text with URL
   useEffect(() => {
@@ -39,24 +45,29 @@ const Navbar = () => {
     }
   }, [location.search, location.pathname]);
 
+
   // Live Search Logic
   useEffect(() => {
     const delayDebounceFn = setTimeout(async () => {
-      if (searchText.trim()) {
-        try {
-          // Use the correct catalog API
-          const res = await axios.get(`http://localhost:5000/api/catalog/products?search=${searchText}`);
-          setResults(res.data);
-        } catch (err) {
-          console.error("Search error:", err);
-        }
-      } else {
+      // If search text is empty, clear results and return
+      if (!searchText.trim()) {
         setResults([]);
+        return;
       }
+
+      try {
+        // Use the correct catalog API
+        const res = await axios.get(`http://localhost:5000/api/catalog/products?search=${searchText}`);
+        setResults(res.data);
+      } catch (err) {
+        console.error("Search error:", err);
+      }
+
     }, 300); // 300ms delay for 'as you type' feel
 
     return () => clearTimeout(delayDebounceFn);
   }, [searchText]);
+
 
   // ✅ OPEN CART ONLY (NO TOGGLE)
   const handleCartClick = () => {
@@ -108,7 +119,7 @@ const Navbar = () => {
 
           {/* LOGO */}
           <Link to="/" onClick={closeMenu} className="flex-shrink-0 pb-2">
-            <img src={VTLogo} className="h-16 md:h-20" />
+            <img src="/VT_LogoTSC.png" className="h-16 md:h-20" alt="VT Printz Logo" />
           </Link>
 
           {/* SEARCH */}

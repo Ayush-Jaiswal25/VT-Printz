@@ -7,7 +7,7 @@ const shapeOptions = ["Logo Cutout", "Circle", "Square"];
 const packOptions = [10, 20, 50, 100, "3 Pieces Sample"];
 
 function ProviderProductDetail() {
-  const { addToCart, shareCartOnWhatsApp } = React.useContext(MyContext) || {};
+  const { addToCart, shareCartOnWhatsApp, fetchCartCount } = React.useContext(MyContext) || {};
   const location = useLocation();
   const [params] = useSearchParams();
 
@@ -49,15 +49,23 @@ function ProviderProductDetail() {
 
   const onAddToCart = async () => {
     const token = localStorage.getItem("token");
-    if (!token) {
-      alert("Please login to add items to cart");
-      navigate("/login-and-signup");
+    const productId = baseItem?._id;
+
+    if (!productId) {
+      alert("Product ID not found. Please navigate from the product list.");
       return;
     }
 
-    const productId = baseItem?._id;
-    if (!productId) {
-      alert("Product ID not found. Please navigate from the product list.");
+    if (!token) {
+      // Save pending item to localStorage
+      const pendingItem = {
+        type: 'provider',
+        productId,
+        quantity: qty
+      };
+      localStorage.setItem('pendingCartItem', JSON.stringify(pendingItem));
+      alert("Please login to add items to cart");
+      navigate("/login-and-signup");
       return;
     }
 
@@ -72,6 +80,7 @@ function ProviderProductDetail() {
       );
 
       alert("Added to cart successfully!");
+      if (fetchCartCount) fetchCartCount();
     } catch (err) {
       console.error(err);
       alert("Failed to add to cart");
