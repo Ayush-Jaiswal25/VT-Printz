@@ -13,7 +13,7 @@ const MyContextProvider = (props) => {
             return;
         }
         try {
-            const res = await axios.get("http://localhost:5000/api/cart/get", {
+            const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/cart/get`, {
                 headers: { "auth-token": token }
             });
             // Assuming res.data.items is the array of cart items

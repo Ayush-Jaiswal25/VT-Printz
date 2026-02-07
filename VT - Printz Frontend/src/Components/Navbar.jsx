@@ -57,7 +57,7 @@ const Navbar = () => {
 
       try {
         // Use the correct catalog API
-        const res = await axios.get(`http://localhost:5000/api/catalog/products?search=${searchText}`);
+        const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/catalog/products?search=${searchText}`);
         setResults(res.data);
       } catch (err) {
         console.error("Search error:", err);

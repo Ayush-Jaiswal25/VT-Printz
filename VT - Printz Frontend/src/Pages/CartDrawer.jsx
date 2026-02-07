@@ -18,7 +18,7 @@ function CartDrawer({ onClose }) {
 
     setLoading(true);
     try {
-      const res = await axios.get("http://localhost:5000/api/cart/get", {
+      const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/cart/get`, {
         headers: { "auth-token": token },
       });
       setCartItems(res.data);
@@ -39,7 +39,7 @@ function CartDrawer({ onClose }) {
     const token = localStorage.getItem("token");
     try {
       const res = await axios.post(
-        "http://localhost:5000/api/cart/update",
+        `${import.meta.env.VITE_API_URL}/api/cart/update`,
         { productId: id, type },
         { headers: { "auth-token": token } }
       );
@@ -53,7 +53,7 @@ function CartDrawer({ onClose }) {
     const token = localStorage.getItem("token");
     try {
       const res = await axios.post(
-        "http://localhost:5000/api/cart/remove",
+        `${import.meta.env.VITE_API_URL}/api/cart/remove`,
         { productId: id },
         { headers: { "auth-token": token } }
       );

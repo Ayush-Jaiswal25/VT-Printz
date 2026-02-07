@@ -15,7 +15,7 @@ const Products = () => {
         // We can use the simple categories endpoint or full catalog. 
         // Full catalog gives us images too if they are stored on the category object.
         // But simpler endpoint is lighter. Let's use full catalog to be consistent with images.
-        const res = await axios.get("http://localhost:5000/api/catalog/full-catalog");
+        const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/catalog/full-catalog`);
         setCategories(res.data);
       } catch (error) {
         console.error("Failed to load products:", error);

@@ -10,30 +10,30 @@ const AddServices = () => {
   });
 
   const submit = async (e) => {
-  e.preventDefault();
+    e.preventDefault();
 
-  if (!data.media) {
-    alert("Please select a file to upload");
-    return;
-  }
+    if (!data.media) {
+      alert("Please select a file to upload");
+      return;
+    }
 
-  const formData = new FormData();
-  formData.append("name", data.name);
-  formData.append("price", data.price);
-  formData.append("category", data.category);
-  formData.append("media", data.media);
+    const formData = new FormData();
+    formData.append("name", data.name);
+    formData.append("price", data.price);
+    formData.append("category", data.category);
+    formData.append("media", data.media);
 
-  try {
-    await axios.post("http://localhost:5000/api/products", formData, {
-      headers: { "Content-Type": "multipart/form-data" },
-    });
-    alert("✅ Uploaded successfully!");
-    setData({ name: "", price: "", category: "", media: null });
-  } catch (err) {
-    console.error(err);
-    alert("❌ Upload failed. Check console for errors.");
-  }
-};
+    try {
+      await axios.post(`${import.meta.env.VITE_API_URL}/api/products`, formData, {
+        headers: { "Content-Type": "multipart/form-data" },
+      });
+      alert("✅ Uploaded successfully!");
+      setData({ name: "", price: "", category: "", media: null });
+    } catch (err) {
+      console.error(err);
+      alert("❌ Upload failed. Check console for errors.");
+    }
+  };
 
 
   return (

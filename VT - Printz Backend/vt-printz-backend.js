@@ -65,19 +65,15 @@ const vtPrintzBackend = express();
 const PORT = process.env.PORT || 5000;
 
 // -------------------- MIDDLEWARE --------------------
+
+// -------------------- MIDDLEWARE --------------------
 vtPrintzBackend.use(
     cors({
-        origin: [
-            'http://localhost:4011', // frontend
-            'http://localhost:4012',
-            'http://localhost:5000',
-            'http://localhost:5174',
-            'http://localhost:5173', // admin (add correct port)
-        ],
-        methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
-        credentials: true,
+        origin: '*', // For testing. Better to use specific URLs in production.
+        // credentials: true, 
     })
 );
+
 
 vtPrintzBackend.use(cookieParser());
 vtPrintzBackend.use(express.json());

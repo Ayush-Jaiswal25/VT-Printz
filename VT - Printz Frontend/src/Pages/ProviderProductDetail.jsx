@@ -74,7 +74,7 @@ function ProviderProductDetail() {
       // qty is the number of pieces (e.g. 10, 20)
       // Assuming backend Product price is per piece
       await import("axios").then(axios =>
-        axios.default.post("http://localhost:5000/api/cart/add",
+        axios.default.post(`${import.meta.env.VITE_API_URL}/api/cart/add`,
           { productId, quantity: qty },
           { headers: { "auth-token": token } })
       );

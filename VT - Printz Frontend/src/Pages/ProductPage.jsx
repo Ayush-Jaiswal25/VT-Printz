@@ -13,7 +13,7 @@ const ProductPage = () => {
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const res = await axios.get("http://localhost:5000/api/catalog/full-catalog");
+        const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/catalog/full-catalog`);
         // Map the API data to the structure needed for the card
         const mappedData = res.data.map(cat => ({
           label: cat.category,

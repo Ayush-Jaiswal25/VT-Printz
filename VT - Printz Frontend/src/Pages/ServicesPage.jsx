@@ -153,7 +153,7 @@ const ServicesPage = () => {
       try {
         // Determine API URL based on environment
         // Assuming localhost for now as per instructions, or relative path if proxied
-        const res = await axios.get("http://localhost:5000/api/catalog/full-catalog");
+        const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/catalog/full-catalog`);
         setCatalogData(res.data);
 
         // Set default category if not already set or if URL param exists (ONLY ON INIT)

@@ -98,7 +98,7 @@ function Admin() {
     setProviderLoading(true);
     setProviderError("");
     try {
-      const res = await axios.get(`http://localhost:5000/api/products?search=${encodeURIComponent(providerQuery)}`);
+      const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/products?search=${encodeURIComponent(providerQuery)}`);
       setProducts(Array.isArray(res.data) ? res.data : []);
     } catch {
       setProviderError("Failed to load products");
@@ -128,27 +128,24 @@ function Admin() {
               <nav className="border-t border-gray-100">
                 <button
                   onClick={() => setActive("serviceprovider")}
-                  className={`flex w-full items-center gap-3 px-4 py-3 text-sm ${
-                    active === "serviceprovider" ? "bg-gray-100 text-gray-900" : "text-gray-700 hover:bg-gray-50"
-                  }`}
+                  className={`flex w-full items-center gap-3 px-4 py-3 text-sm ${active === "serviceprovider" ? "bg-gray-100 text-gray-900" : "text-gray-700 hover:bg-gray-50"
+                    }`}
                 >
                   <UserCog size={18} />
                   Service Provider
                 </button>
                 <button
                   onClick={() => setActive("addservice")}
-                  className={`flex w-full items-center gap-3 px-4 py-3 text-sm ${
-                    active === "addservice" ? "bg-gray-100 text-gray-900" : "text-gray-700 hover:bg-gray-50"
-                  }`}
+                  className={`flex w-full items-center gap-3 px-4 py-3 text-sm ${active === "addservice" ? "bg-gray-100 text-gray-900" : "text-gray-700 hover:bg-gray-50"
+                    }`}
                 >
                   <PlusSquare size={18} />
                   Add Service
                 </button>
                 <button
                   onClick={() => setActive("feedback")}
-                  className={`flex w-full items-center gap-3 px-4 py-3 text-sm ${
-                    active === "feedback" ? "bg-gray-100 text-gray-900" : "text-gray-700 hover:bg-gray-50"
-                  }`}
+                  className={`flex w-full items-center gap-3 px-4 py-3 text-sm ${active === "feedback" ? "bg-gray-100 text-gray-900" : "text-gray-700 hover:bg-gray-50"
+                    }`}
                 >
                   <MessageSquare size={18} />
                   Feedback List

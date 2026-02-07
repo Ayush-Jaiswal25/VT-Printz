@@ -18,7 +18,7 @@ const ProductList = () => {
     const fetchProducts = async () => {
       try {
         const res = await axios.get(
-          `http://localhost:5000/api/catalog/products?search=${searchQuery}`
+          `${import.meta.env.VITE_API_URL}/api/catalog/products?search=${searchQuery}`
         );
         setProducts(res.data);
         setCurrentPage(1);
@@ -38,7 +38,7 @@ const ProductList = () => {
 
   const handleDelete = async (id) => {
     // Admin only functionality - disabled for public view
-    // await axios.delete(`http://localhost:5000/api/catalog/products/${id}`);
+    // await axios.delete(`${import.meta.env.VITE_API_URL}/api/catalog/products/${id}`);
     // setProducts(products.filter((item) => item._id !== id));
     alert("Action not authorized");
   };
